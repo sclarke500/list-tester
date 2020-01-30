@@ -1,38 +1,44 @@
-<div style='text-align: center; padding: 20px'>
- New String: <input [(ngModel)]='itemInput'>
+<div style='max-width: 1000px; margin: auto;'>
+
+  <div style='text-align: center; padding: 20px'>
+  New String: <input [(ngModel)]='itemInput'>
+  </div>
+
+  <div class='container'>
+
+    <div class='test'>
+      <h3>LIFO</h3>
+      <hr>
+      <button (click)='addLifo()'>Add New String</button>
+      <br>
+      <button (click)='lifoPop()'>Pop</button>
+      <hr>
+      Count: {{ ll.count }}<br>
+      {{ ll.toString }}
+    </div>
+
+    <div class='test'>
+      <h3>FIFO</h3>
+      <hr>
+      <button (click)='addFifo()'>Add New String</button>
+      <br>
+      <button (click)='fifoPop()'>Pop</button>
+      <hr>
+      Count: {{ fl.count }}<br>
+      {{ fl.toString }}
+    </div>
+
+    <div class='test'>
+      <h3>Ordered</h3>
+      <hr>
+      <button (click)='addOrdered()'>Add New String</button>
+      <br>
+      <button (click)='orderedPop()'>Pop</button>
+      <hr>
+      Count: {{ ol.count }}<br>
+      {{ ol.toString }}
+    </div>
+
+  </div>
+
 </div>
-
-<div class='container'>
-
-  <div class='test'>
-    <h3>LIFO</h3>
-    <hr>
-    <button (click)='addLifo()'>Add New String</button>
-    <br>
-    <button (click)='lifoPop()'>Pop</button>
-    <hr>
-    {{ ll.toString }}
-  </div>
-
-  <div class='test'>
-    <h3>FIFO</h3>
-    <hr>
-    <button (click)='addFifo()'>Add New String</button>
-    <br>
-    <button (click)='fifoPop()'>Pop</button>
-    <hr>
-    {{ fl.toString }}
-  </div>
-
-  <div class='test'>
-    <h3>Ordered</h3>
-    <hr>
-    <button (click)='addOrdered()'>Add New String</button>
-    <br>
-    <button (click)='orderedPop()'>Pop</button>
-    <hr>
-    {{ ol.toString }}
-  </div>
-
-</div>
-

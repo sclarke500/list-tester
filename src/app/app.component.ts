@@ -48,22 +48,26 @@ export class AppComponent {
     console.log(li);
   }
 
+  addTo(listRef) {
+    if (!this.itemInput) {
+      alert ('no value entered');
+     return;
+    } else {
+      listRef.add(this.itemInput);
+      this.itemInput = '';
+    }
+  }
+
   addLifo() {
-    if (!this.itemInput) alert ('no value entered');
-    this.ll.add(this.itemInput);
-    this.itemInput = '';
+    this.addTo(this.ll);
   }
 
   addFifo() {
-    if (!this.itemInput) alert ('no value entered');
-    this.fl.add(this.itemInput);
-    this.itemInput = '';
+    this.addTo(this.fl);
   }
 
   addOrdered() {
-    if (!this.itemInput) alert ('no value entered');
-    this.ol.add(this.itemInput);
-    this.itemInput = '';
+    this.addTo(this.ol);
   }
 
   orderedPop() {
