@@ -49,12 +49,26 @@ export class AppComponent {
   }
 
   addLifo() {
+    if (!this.itemInput) alert ('no value entered');
     this.ll.add(this.itemInput);
+    this.itemInput = '';
   }
 
   addFifo() {
+    if (!this.itemInput) alert ('no value entered');
     this.fl.add(this.itemInput);
+    this.itemInput = '';
   }
 
+  addOrdered() {
+    if (!this.itemInput) alert ('no value entered');
+    this.ol.add(this.itemInput);
+    this.itemInput = '';
+  }
+
+  orderedPop() {
+    let li = this.ol.pop();
+    console.log(li);
+  }
 
 }
