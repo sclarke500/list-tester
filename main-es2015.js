@@ -322,10 +322,26 @@ let AppComponent = class AppComponent {
         console.log(li);
     }
     addLifo() {
+        if (!this.itemInput)
+            alert('no value entered');
         this.ll.add(this.itemInput);
+        this.itemInput = '';
     }
     addFifo() {
+        if (!this.itemInput)
+            alert('no value entered');
         this.fl.add(this.itemInput);
+        this.itemInput = '';
+    }
+    addOrdered() {
+        if (!this.itemInput)
+            alert('no value entered');
+        this.ol.add(this.itemInput);
+        this.itemInput = '';
+    }
+    orderedPop() {
+        let li = this.ol.pop();
+        console.log(li);
     }
 };
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -533,9 +549,27 @@ class OrderedList {
             this.top = li;
         }
         else {
-            // append to front of list
-            li.next = this.top;
-            this.top = li;
+            // append to appropriate place in list
+            // start at top and work up the list thru next calls
+            // go until we hit a value that comes after our value in the list
+            // or we hit the end of the list
+            let temp = this.top;
+            let itemToAddAfter = null;
+            while (temp.next && itemToAddAfter == null) { // while there are more items in list and we haven't yet found the one
+                if (temp.next.value.localeCompare(val) < 0) { // if this item's next comes before our new value
+                    temp = temp.next; // try next
+                }
+                else {
+                    itemToAddAfter = temp;
+                }
+            }
+            if (itemToAddAfter == null) { // we got to end of list and no items are > our new item
+                temp.next = li; // set to next of last item
+            }
+            else {
+                li.next = itemToAddAfter.next;
+                itemToAddAfter.next = li;
+            }
         }
         this.count++;
     }

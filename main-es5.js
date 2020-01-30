@@ -721,12 +721,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "addLifo",
         value: function addLifo() {
+          if (!this.itemInput) alert('no value entered');
           this.ll.add(this.itemInput);
+          this.itemInput = '';
         }
       }, {
         key: "addFifo",
         value: function addFifo() {
+          if (!this.itemInput) alert('no value entered');
           this.fl.add(this.itemInput);
+          this.itemInput = '';
+        }
+      }, {
+        key: "addOrdered",
+        value: function addOrdered() {
+          if (!this.itemInput) alert('no value entered');
+          this.ol.add(this.itemInput);
+          this.itemInput = '';
+        }
+      }, {
+        key: "orderedPop",
+        value: function orderedPop() {
+          var li = this.ol.pop();
+          console.log(li);
         }
       }]);
 
@@ -1072,9 +1089,30 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // first item
             this.top = li;
           } else {
-            // append to front of list
-            li.next = this.top;
-            this.top = li;
+            // append to appropriate place in list
+            // start at top and work up the list thru next calls
+            // go until we hit a value that comes after our value in the list
+            // or we hit the end of the list
+            var temp = this.top;
+            var itemToAddAfter = null;
+
+            while (temp.next && itemToAddAfter == null) {
+              // while there are more items in list and we haven't yet found the one
+              if (temp.next.value.localeCompare(val) < 0) {
+                // if this item's next comes before our new value
+                temp = temp.next; // try next
+              } else {
+                itemToAddAfter = temp;
+              }
+            }
+
+            if (itemToAddAfter == null) {
+              // we got to end of list and no items are > our new item
+              temp.next = li; // set to next of last item
+            } else {
+              li.next = itemToAddAfter.next;
+              itemToAddAfter.next = li;
+            }
           }
 
           this.count++;
